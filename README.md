@@ -1,4 +1,4 @@
-# [WIP] randomized-gnmf
+# randomized-gnmf
 
 Combination of GNMF [1] and randomized NMF [2]
 
