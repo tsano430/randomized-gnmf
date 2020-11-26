@@ -7,6 +7,15 @@ Usage
 
 Please see [simulation.ipynb][sim].
 
+Dependency
+----------
+
+- numpy
+- scipy
+- scikit-learn
+- munkres
+- pyitlib
+
 References
 ----------
 
@@ -14,4 +23,4 @@ References
 
 [2] N. B. Erichson, A. Mendible, S. Wihlborn, and J. N. Kutz, Randomized nonnegative matrix factorization. Pattern Recognition Letters, vol. 104, pp. 1–7, 2018.
 
-[sim]: https://github.com/tsano430/randomized-gnmf/blob/main/simulation.ipynb
+[sim]: https://github.com/tsano430/randomized-gnmf/blob/master/simulation.ipynb
