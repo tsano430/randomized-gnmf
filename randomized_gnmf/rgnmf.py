@@ -150,6 +150,20 @@ def gnmf_algorithm(X, U, V, W, D):
 
 
 def compute_qb(X, n_components, oversampling=20, n_subspace=2):
+    """construct p-nearest neighbor graph
+    
+    Parameters
+    ----------
+    X: given matrix
+    n_components: given dimension size
+    oversampling: number of oversampling 
+    n_subspace: number of power iteration
+    
+    Returns
+    -------
+    Q: Compress/Uncompress
+    B: low-dimensional given matrix
+    """
     row, col = X.shape
     rand_mat = np.random.randn(col, n_components + oversampling)
     Y = np.dot(X, rand_mat)
@@ -168,8 +182,10 @@ def rgnmf_algorithm(Q, B, U, U_tilde, V, W, D):
     
     Parameters
     ----------
-    X: given matrix
+    Q: Compress/Uncompress
+    B: low-dimensional given matrix
     U: factor matrix (basis)
+    U_tilde: low-dimensional factor matrix (basis)
     V: factor matrix (coefficient)
     W: adjacency matrix of p-NN graph
     D: degree matrix of W
@@ -177,6 +193,7 @@ def rgnmf_algorithm(Q, B, U, U_tilde, V, W, D):
     Returns
     -------
     Unew: updated factor matrix (basis)
+    Unew_tilde: updated low-dimensional factor matrix (basis)
     Vnew: updated factor matrix (coefficient)
     """
     Unew = np.copy(U)
@@ -250,7 +267,6 @@ class GNMF:
             init = objective(X, U, V, L)
             objs = [1.0]
         
-        # MUR
         for it in range(1, self.max_iter+1):
             U, V = gnmf_algorithm(X, U, V, W, D)
 
@@ -316,7 +332,6 @@ class RGNMF(GNMF):
         Q, B = compute_qb(X, self.n_components)
         U_tilde = np.dot(Q.T, U)
         
-        # MUR
         for it in range(1, self.max_iter+1):
             U, U_tilde, V = rgnmf_algorithm(Q, B, U, U_tilde, V, W, D)
 
