@@ -141,15 +141,19 @@ def gnmf_algorithm(X, U, V, W, D):
     Unew: updated factor matrix (basis)
     Vnew: updated factor matrix (coefficient)
     """
-    Unew = U * np.dot(X, V) / np.dot(U, np.dot(V.T, V))
-    Unew = np.fmax(Unew, 1e-9)
+    Unew = np.copy(U)
+    dm = U.shape[1]
+
+    for i in range(dm):
+        Unew[:, i] = Unew[:, i] + (np.dot(X, V[:, i]) - np.dot(np.dot(Unew, V.T), V[:, i]) ) / np.dot(V[:, i], V[:, i])
+        Unew[:, i] = np.fmax(Unew[:, i], 1e-9)
     Vnew = V * (np.dot(X.T, Unew) + np.dot(W, V)) / (np.dot(V, np.dot(Unew.T, Unew)) + np.dot(D, V))
     Vnew = np.fmax(Vnew, 1e-9)
 
     return Unew, Vnew
 
 
-def compute_qb(X, n_components, oversampling=20, n_subspace=2):
+def compute_qb(X, n_components, oversampling=100, n_subspace=5):
     """construct p-nearest neighbor graph
     
     Parameters
