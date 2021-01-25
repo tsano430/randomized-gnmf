@@ -7,8 +7,8 @@ Usage
 
 Please see [simulation.ipynb][sim].
 
-Dependency
-----------
+Dependencies
+------------
 
 - numpy
 - scipy
