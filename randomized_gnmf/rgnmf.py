@@ -11,7 +11,6 @@ import numpy.linalg as LA
 from scipy.sparse import coo_matrix
 from sklearn.metrics import pairwise_distances
 from sklearn.cluster import KMeans
-from .metrics import calc_ac_score, calc_nmi_score
 
 
 def objective(X, U, V, L):

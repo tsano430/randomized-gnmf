@@ -13,8 +13,6 @@ Dependencies
 - numpy
 - scipy
 - scikit-learn
-- munkres
-- pyitlib
 
 References
 ----------
